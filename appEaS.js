@@ -1,3 +1,47 @@
+function colorBoardEnable() {
+  const gridItemsColoring = document.querySelectorAll('div');
+  gridItemsColoring.forEach((item) => {
+    let opacityValue = 0;
+  
+    function rgbRng() {
+      let randomRgbNr = Math.floor(Math.random() * 255) + 0;
+      return randomRgbNr;
+    };
+    function opacityUp() {
+      if (opacityValue < 100) {
+        return opacityValue += 10
+      };
+    };
+  
+    item.addEventListener('mouseenter', () => {
+      if (item.classList.contains('grid-item')) {
+        if (item.classList.contains('colored')) {
+          item.style.opacity = `${opacityUp()}%`;
+          //if i want it to make it all black per assigment then it's needed on each pass for rgb value decreases for ¬10% - but i like it colorfull as it is now ^^
+          return;
+        };
+        item.style.transition = '1s ease 0s';
+        item.style.backgroundColor = `rgb(${rgbRng()}, ${rgbRng()}, ${rgbRng()})`;
+        item.style.opacity = `${opacityUp()}%`;
+        item.classList.add('colored');
+      };
+    });
+  });
+};
+
+function makeIntroGrid() {
+  const xAxisIntroGrid = document.querySelector('.xAxis');
+  xAxisIntroGrid.style.gridTemplateColumns = `repeat(16, 1fr)`;
+  const calculateBoardSize = 16 * 16;
+  for (let i = calculateBoardSize; i > 0; i--) {
+    const createBoardPixels = document.createElement('div');
+    createBoardPixels.classList.add('grid-item');
+    xAxisIntroGrid.appendChild(createBoardPixels);
+  };
+};
+makeIntroGrid();
+colorBoardEnable();
+
 const resizeButton = document.querySelector('.resizeBoard');
 
 function calculateBoard() {
@@ -26,6 +70,19 @@ function calculateBoard() {
     createBoardPixels.classList.add('grid-item');
     xAxis.appendChild(createBoardPixels);
   };
+  colorBoardEnable();
+};
+resizeButton.addEventListener('click', calculateBoard);
+
+function clearBoard() {
+  const gridItemsColoring = document.querySelectorAll('div');
+  gridItemsColoring.forEach((item) => {
+    if(item.classList.contains('colored')) {
+      item.style.backgroundColor = 'inherit';
+      item.style.opacity = '1';
+    };
+  });
 };
 
-resizeButton.addEventListener('click', calculateBoard);
+const clearButton = document.querySelector('.clearBoard');
+clearButton.addEventListener('click', clearBoard);

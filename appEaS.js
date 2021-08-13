@@ -16,6 +16,10 @@ function colorBoardEnable() {
     item.addEventListener('mouseenter', () => {
       if (item.classList.contains('grid-item')) {
         if (item.classList.contains('colored')) {
+          if (item.style.backgroundColor === 'inherit') {
+            item.style.backgroundColor = `rgb(${rgbRng()}, ${rgbRng()}, ${rgbRng()})`;
+            opacityValue = 0;
+          };
           item.style.opacity = `${opacityUp()}%`;
           //if i want it to make it all black per assigment then it's needed on each pass for rgb value decreases for ¬10% - but i like it colorfull as it is now ^^
           return;
@@ -71,7 +75,7 @@ function calculateBoard() {
     xAxis.appendChild(createBoardPixels);
   };
   colorBoardEnable();
-  
+
   resizeButton.classList.add('highlight');
   setTimeout(() => {
     resizeButton.classList.remove('highlight');
@@ -86,6 +90,7 @@ function clearBoard() {
   gridItemsColoring.forEach((item) => {
     if(item.classList.contains('colored')) {
       item.style.backgroundColor = 'inherit';
+      item.style.border = 'outset 1px black';
       item.style.opacity = '1';
     };
   });

@@ -71,8 +71,15 @@ function calculateBoard() {
     xAxis.appendChild(createBoardPixels);
   };
   colorBoardEnable();
+  
+  resizeButton.classList.add('highlight');
+  setTimeout(() => {
+    resizeButton.classList.remove('highlight');
+  }, 1500);
 };
 resizeButton.addEventListener('click', calculateBoard);
+
+const clearButton = document.querySelector('.clearBoard');
 
 function clearBoard() {
   const gridItemsColoring = document.querySelectorAll('div');
@@ -82,7 +89,10 @@ function clearBoard() {
       item.style.opacity = '1';
     };
   });
+  clearButton.classList.add('highlight');
+  setTimeout(() => {
+    clearButton.classList.remove('highlight');
+  }, 1500);
 };
 
-const clearButton = document.querySelector('.clearBoard');
 clearButton.addEventListener('click', clearBoard);

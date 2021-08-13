@@ -1,5 +1,5 @@
 JavaScript project.
 Etch a Sketch.
-Alpha build.
+Final build.
 
 Live preview: https://lavaxcii.github.io/JS-Pro2-Etch-a-Sketch/
